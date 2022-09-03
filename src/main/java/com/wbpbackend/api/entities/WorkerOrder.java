@@ -13,23 +13,26 @@ public class WorkerOrder implements Serializable {
 	private Long id;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
-	private Priority priority;
-	private Status status;
+	private Integer priority;
+	private Integer status;
 	private Dispatcher dispatcher;
 	private Manager manager;
 
 	public WorkerOrder() {
 		super();
+		this.setStartDate(LocalDateTime.now());
+		this.setPriority(Priority.LOW);
+		this.setPriority(Priority.LOW);
+		this.setStatus(Status.OPEN);
 	}
 
-	public WorkerOrder(Long id, LocalDateTime startDate, LocalDateTime endDate, Priority priority, Status status,
+	public WorkerOrder(Long id, LocalDateTime startDate, Priority priority, Status status,
 			Dispatcher dispatcher, Manager manager) {
 		super();
 		this.id = id;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.priority = priority;
-		this.status = status;
+		this.setStartDate(LocalDateTime.now());
+		this.priority = (priority == null) ? 0 : priority.getCod();
+		this.status = (status == null) ? 0 : status.getCod();
 		this.dispatcher = dispatcher;
 		this.manager = manager;
 	}
@@ -59,19 +62,19 @@ public class WorkerOrder implements Serializable {
 	}
 
 	public Priority getPriority() {
-		return priority;
+		return Priority.toEnum(this.priority);
 	}
 
 	public void setPriority(Priority priority) {
-		this.priority = priority;
+		this.priority = priority.getCod();
 	}
 
 	public Status getStatus() {
-		return status;
+		return Status.toEnum(this.status);
 	}
 
 	public void setStatus(Status status) {
-		this.status = status;
+		this.status = status.getCod();
 	}
 
 	public Dispatcher getDispatcher() {
