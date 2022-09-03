@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 public class Manager extends Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "manager")
 	private List<WorkerOrder> list;
 	
 	@NotBlank

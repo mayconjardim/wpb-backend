@@ -22,19 +22,20 @@ public class WorkerOrder implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@JsonFormat(pattern = "MM/dd/yyyy HH:mm")
 	private LocalDateTime startDate;
-	
+
 	@JsonFormat(pattern = "MM/dd/yyyy")
 	private LocalDateTime endDate;
 	private Integer priority;
 	private Integer status;
-	
+	private String description;
+
 	@ManyToOne
 	@JoinColumn(name = "dispatcher_id")
 	private Dispatcher dispatcher;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "manager_id")
 	private Manager manager;
@@ -47,13 +48,14 @@ public class WorkerOrder implements Serializable {
 		this.setStatus(Status.OPEN);
 	}
 
-	public WorkerOrder(Long id, LocalDateTime startDate, Priority priority, Status status,
-			Dispatcher dispatcher, Manager manager) {
+	public WorkerOrder(Long id, LocalDateTime startDate, Priority priority, Status status, Dispatcher dispatcher,
+			Manager manager, String description) {
 		super();
 		this.id = id;
 		this.setStartDate(LocalDateTime.now());
 		this.priority = (priority == null) ? 0 : priority.getCod();
 		this.status = (status == null) ? 0 : status.getCod();
+		this.description = description;
 		this.dispatcher = dispatcher;
 		this.manager = manager;
 	}
@@ -80,6 +82,10 @@ public class WorkerOrder implements Serializable {
 
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public Priority getPriority() {
