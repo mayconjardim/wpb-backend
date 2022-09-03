@@ -4,18 +4,39 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wbpbackend.api.enums.Priority;
 import com.wbpbackend.api.enums.Status;
 
+@Entity
 public class WorkerOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@JsonFormat(pattern = "MM/dd/yyyy HH:mm")
 	private LocalDateTime startDate;
+	
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private LocalDateTime endDate;
 	private Integer priority;
 	private Integer status;
+	
+	@ManyToOne
+	@JoinColumn(name = "dispatcher_id")
 	private Dispatcher dispatcher;
+	
+	@ManyToOne
+	@JoinColumn(name = "manager_id")
 	private Manager manager;
 
 	public WorkerOrder() {
