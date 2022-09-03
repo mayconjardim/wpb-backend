@@ -1,6 +1,7 @@
 package com.wbpbackend.api.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ public class Manager extends Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@OneToMany(mappedBy = "manager")
-	private List<WorkerOrder> list;
+	private List<WorkerOrder> list = new ArrayList<>();
 	
 	@NotBlank
 	private String phoneNumber;

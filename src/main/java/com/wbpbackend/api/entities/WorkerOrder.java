@@ -48,7 +48,7 @@ public class WorkerOrder implements Serializable {
 		this.setStatus(Status.OPEN);
 	}
 
-	public WorkerOrder(Long id, LocalDateTime startDate, Priority priority, Status status, Dispatcher dispatcher,
+	public WorkerOrder(Long id, Priority priority, Status status, Dispatcher dispatcher,
 			Manager manager, String description) {
 		super();
 		this.id = id;
