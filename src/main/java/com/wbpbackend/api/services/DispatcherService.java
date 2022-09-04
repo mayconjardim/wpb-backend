@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wbpbackend.api.dto.DispatcherDTO;
 import com.wbpbackend.api.entities.Dispatcher;
 import com.wbpbackend.api.repositories.DispatcherRepository;
 
@@ -14,9 +15,10 @@ public class DispatcherService {
 	@Autowired
 	private DispatcherRepository dispatcherRepository;
 
-	public Dispatcher findById(Long id) {
+	public DispatcherDTO findById(Long id) {
 		Optional<Dispatcher> obj = dispatcherRepository.findById(id);
-		return obj.orElse(null);
+		Dispatcher entity = obj.orElse(null);
+		return new DispatcherDTO(entity);
 	}
 
 }

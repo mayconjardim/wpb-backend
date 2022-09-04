@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wbpbackend.api.entities.Dispatcher;
+import com.wbpbackend.api.dto.DispatcherDTO;
 import com.wbpbackend.api.services.DispatcherService;
 
 @RestController
@@ -18,9 +18,10 @@ public class DispatcherResources {
 	private DispatcherService dispatcherService;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Dispatcher> findById(@PathVariable Long id) {
-		Dispatcher obj = dispatcherService.findById(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<DispatcherDTO> findById(@PathVariable Long id) {
+		DispatcherDTO dto = dispatcherService.findById(id);
+		
+		return ResponseEntity.ok().body(dto);
 	}
 
 }
