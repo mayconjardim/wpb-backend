@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.wbpbackend.api.dto.DispatcherDTO;
 import com.wbpbackend.api.entities.Dispatcher;
 import com.wbpbackend.api.repositories.DispatcherRepository;
+import com.wbpbackend.api.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class DispatcherService {
@@ -17,7 +18,8 @@ public class DispatcherService {
 
 	public DispatcherDTO findById(Long id) {
 		Optional<Dispatcher> obj = dispatcherRepository.findById(id);
-		Dispatcher entity = obj.orElse(null);
+		Dispatcher entity = obj.orElseThrow(() -> new ObjectNotFoundException
+				(Dispatcher.class.getName() + " not found! id: " + id)); 
 		return new DispatcherDTO(entity);
 	}
 
