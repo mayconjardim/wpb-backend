@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wbpbackend.api.dto.DispatcherDTO;
 import com.wbpbackend.api.entities.Dispatcher;
 import com.wbpbackend.api.repositories.DispatcherRepository;
+import com.wbpbackend.api.services.exceptions.DatabaseException;
 import com.wbpbackend.api.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -54,4 +57,17 @@ public class DispatcherService {
 			throw new ObjectNotFoundException("Id not found " + id);
 		}
 	}
+	
+	public void delete(Long id) {
+		try {
+			dispatcherRepository.deleteById(id);
+		}
+		catch (EmptyResultDataAccessException e) {
+			throw new ObjectNotFoundException("Id not found " + id);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DatabaseException("Integrity violation");
+		}
+	}
+	
 }
