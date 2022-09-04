@@ -7,10 +7,13 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Dispatcher extends Person implements Serializable{
+public class Dispatcher extends Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "dispatcher")
 	private List<WorkerOrder> list = new ArrayList<>();
 	

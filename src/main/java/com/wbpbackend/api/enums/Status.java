@@ -2,7 +2,7 @@ package com.wbpbackend.api.enums;
 
 public enum Status {
 
-	OPEN(0, "OPEN"), PROCESSING(1, "PROCESSING"), DISPATCHED(2, "DISPATCHED"), CLOSED(2, "CLOSED");
+	OPEN(0, "OPEN"), PROCESSING(1, "PROCESSING"), DISPATCHED(2, "DISPATCHED");
 	
 	private Integer cod;
 	private String description;
