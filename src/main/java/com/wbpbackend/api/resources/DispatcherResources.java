@@ -3,6 +3,8 @@ package com.wbpbackend.api.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +39,7 @@ public class DispatcherResources {
 	}
 	
 	@PostMapping
-	public ResponseEntity<DispatcherDTO> insert(@RequestBody DispatcherDTO dto){
+	public ResponseEntity<DispatcherDTO> insert(@Valid @RequestBody DispatcherDTO dto){
 		dto = dispatcherService.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
