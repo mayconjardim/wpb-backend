@@ -44,12 +44,11 @@ public class WorkerOrder implements Serializable {
 		super();
 		this.setStartDate(LocalDateTime.now());
 		this.setPriority(Priority.LOW);
-		this.setPriority(Priority.LOW);
 		this.setStatus(Status.OPEN);
 	}
 
-	public WorkerOrder(Long id, Priority priority, Status status, Dispatcher dispatcher,
-			Manager manager, String description) {
+	public WorkerOrder(Long id, Priority priority, Status status, Dispatcher dispatcher, Manager manager,
+			String description) {
 		super();
 		this.id = id;
 		this.setStartDate(LocalDateTime.now());
@@ -82,6 +81,18 @@ public class WorkerOrder implements Serializable {
 
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
+	}
+
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getDescription() {
