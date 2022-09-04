@@ -1,5 +1,7 @@
 package com.wbpbackend.api.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,12 @@ public class DispatcherResources {
 		DispatcherDTO dto = dispatcherService.findById(id);
 		
 		return ResponseEntity.ok().body(dto);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<DispatcherDTO>> findAll(){
+		List<DispatcherDTO> list = dispatcherService.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 
 }

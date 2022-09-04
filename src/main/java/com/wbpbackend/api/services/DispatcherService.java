@@ -1,6 +1,8 @@
 package com.wbpbackend.api.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,4 +25,9 @@ public class DispatcherService {
 		return new DispatcherDTO(entity);
 	}
 
+	public List<DispatcherDTO> findAll() {
+		List<Dispatcher> list = dispatcherRepository.findAll();
+		return list.stream().map(x -> new DispatcherDTO(x)).collect(Collectors.toList());
+	}
+	
 }

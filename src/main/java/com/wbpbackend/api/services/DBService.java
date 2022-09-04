@@ -31,6 +31,7 @@ public class DBService {
 	public void runDB() {
 
 		Dispatcher d1 = new Dispatcher(null, "Dispatcher sinistro");
+		Dispatcher d2 = new Dispatcher(null, "Roberto Monteiro");
 		Manager m1 = new Manager(null, "Rodrigo Tjeua", "+55198414454", "rod@gmail.com");
 
 		WorkerOrder wrk = new WorkerOrder(null, Priority.HIGH, Status.OPEN, d1, m1, "Vasco da gama");
@@ -38,7 +39,7 @@ public class DBService {
 		d1.getList().add(wrk);
 		m1.getList().add(wrk);
 
-		dispatcherRepository.saveAll(Arrays.asList(d1));
+		dispatcherRepository.saveAll(Arrays.asList(d1, d2));
 		managerRepository.saveAll(Arrays.asList(m1));
 
 		workerRepository.saveAll(Arrays.asList(wrk));
