@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.wbpbackend.api.dto.DispatcherDTO;
 import com.wbpbackend.api.entities.Dispatcher;
@@ -18,16 +19,24 @@ public class DispatcherService {
 	@Autowired
 	private DispatcherRepository dispatcherRepository;
 
+	@Transactional(readOnly = true)
 	public DispatcherDTO findById(Long id) {
 		Optional<Dispatcher> obj = dispatcherRepository.findById(id);
-		Dispatcher entity = obj.orElseThrow(() -> new ObjectNotFoundException
-				(Dispatcher.class.getName() + " not found! id: " + id)); 
+		Dispatcher entity = obj
+				.orElseThrow(() -> new ObjectNotFoundException(Dispatcher.class.getName() + " not found! id: " + id));
 		return new DispatcherDTO(entity);
 	}
 
+	@Transactional(readOnly = true)
 	public List<DispatcherDTO> findAll() {
 		List<Dispatcher> list = dispatcherRepository.findAll();
 		return list.stream().map(x -> new DispatcherDTO(x)).collect(Collectors.toList());
 	}
-	
+
+	@Transactional
+	public DispatcherDTO insert(DispatcherDTO dto) {
+		Dispatcher entity = new Dispatcher(null, dto.getName());
+		entity = dispatcherRepository.save(entity);
+		return new DispatcherDTO(entity);
+	}
 }

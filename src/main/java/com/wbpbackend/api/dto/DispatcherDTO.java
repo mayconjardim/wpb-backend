@@ -10,6 +10,16 @@ public class DispatcherDTO implements Serializable {
 	private Long id;
 	private String name;
 	
+	
+	public DispatcherDTO() {
+	}
+	
+	public DispatcherDTO(Long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 	public DispatcherDTO(Dispatcher entity) {
 		super();
 		this.id = entity.getId();
